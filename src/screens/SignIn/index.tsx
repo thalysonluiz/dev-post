@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, ButtonText, Container, Input, SignUpButton, SignUpText, Title } from './styles';
 import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
