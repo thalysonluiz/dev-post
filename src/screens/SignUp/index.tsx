@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button, ButtonText, Container, Input, SignUpButton, SignUpText, Title } from './styles';
-import { Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@hooks/useAuth';
 
 export function SignUp() {
   const [name, setName] = useState('');
@@ -9,9 +10,21 @@ export function SignUp() {
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
+  const { signUp } = useAuth();
 
   function handleSignUp() {
+    if (name === '' || email === '' || password === '') {
+      Alert.alert('Campos não podem ser vazios')
+      return;
+    }
 
+    const data = {
+      name,
+      email,
+      password
+    }
+
+    signUp(data);
   }
 
   return (
