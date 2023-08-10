@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, ButtonText, Container, Input, SignUpButton, SignUpText, Title } from './styles';
-import { Alert, Text } from 'react-native';
+import { ActivityIndicator, Alert, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '@hooks/useAuth';
 
@@ -10,7 +10,7 @@ export function SignUp() {
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
-  const { signUp } = useAuth();
+  const { signUp, isUserLoading } = useAuth();
 
   function handleSignUp() {
     if (name === '' || email === '' || password === '') {
@@ -52,7 +52,11 @@ export function SignUp() {
       />
 
       <Button onPress={handleSignUp}>
-        <ButtonText>Cadastrar</ButtonText>
+        {
+          isUserLoading ? <ActivityIndicator size={20} color='#FFF' />
+            : <ButtonText>Cadastrar</ButtonText>
+        }
+
       </Button>
 
       <SignUpButton onPress={() => navigation.goBack()}>

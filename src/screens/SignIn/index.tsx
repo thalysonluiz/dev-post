@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Button, ButtonText, Container, Input, SignUpButton, SignUpText, Title } from './styles';
-import { Text } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@hooks/useAuth';
 
 export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
+  const { isUserLoading } = useAuth();
 
   function handleSignIn() {
     console.log(email, password)
@@ -33,7 +35,10 @@ export function SignIn() {
       />
 
       <Button onPress={handleSignIn}>
-        <ButtonText>Acessar</ButtonText>
+        {
+          isUserLoading ? <ActivityIndicator size={20} color='#FFF' />
+            : <ButtonText>Acessar</ButtonText>
+        }
       </Button>
 
       <SignUpButton onPress={() => navigation.navigate('SignUp')}>
