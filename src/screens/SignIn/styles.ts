@@ -33,8 +33,19 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const ButtonText = styled.Text``;
+export const ButtonText = styled.Text`
+  color: #fff;
+  font-size: 20px;
+`;
 
-export const SignUpButton = styled.TouchableOpacity``;
+export const SignUpButton = styled.TouchableOpacity`
+  width: 100%;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+`;
 
-export const SignUpText = styled.Text``;
+export const SignUpText = styled.Text`
+  color: #ddd;
+  font-size: 15px;
+`;
