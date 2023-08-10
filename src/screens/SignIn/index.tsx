@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import { Button, ButtonText, Container, Input, SignUpButton, SignUpText, Title } from './styles';
 import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const navigation = useNavigation();
+
+  function handleSignIn() {
+    console.log(email, password)
+  }
 
   return (
     <Container>
@@ -14,13 +22,17 @@ export function SignIn() {
 
       <Input
         placeholder="email@email.com"
+        value={email}
+        onChangeText={setEmail}
       />
       <Input
         placeholder="*****"
         secureTextEntry={true}
+        value={password}
+        onChangeText={setPassword}
       />
 
-      <Button >
+      <Button onPress={handleSignIn}>
         <ButtonText>Acessar</ButtonText>
       </Button>
 
