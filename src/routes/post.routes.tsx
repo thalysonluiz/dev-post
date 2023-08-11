@@ -8,7 +8,14 @@ export function PostRoutes() {
   return (
     <Stack.Navigator screenOptions={{}}>
       <Stack.Screen name="Posts" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="NewPost" component={NewPost} />
+      <Stack.Screen name="NewPost" component={NewPost}
+        options={{
+          headerStyle: {
+            backgroundColor: '#36393f',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
     </Stack.Navigator>
   );
 }
