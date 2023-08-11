@@ -3,6 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { Home } from '@screens/Home';
 import { Profile } from '@screens/Profile';
 import { Search } from '@screens/Search';
+import { PostRoutes } from './post.routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,11 +18,12 @@ export function AppRoutes() {
           backgroundColor: '#202225'
         },
         tabBarActiveTintColor: '#FFFFFF',
+        headerShown: false
       }}
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={PostRoutes}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="home" color={color} size={size} />
