@@ -2,11 +2,12 @@ import { ActivityIndicator, View } from 'react-native';
 import { AuthRoutes } from './auth.routes';
 import { AppRoutes } from './app.routes';
 import { useAuth } from '@hooks/useAuth';
+import { Loading } from '@components/Loading';
 
 export function Routes() {
   const { signed, loading } = useAuth();
 
   return (
-    loading ? <ActivityIndicator size={50} color="#e52246" /> : (signed ? <AppRoutes /> : <AuthRoutes />)
+    loading ? <Loading /> : (signed ? <AppRoutes /> : <AuthRoutes />)
   );
 }
