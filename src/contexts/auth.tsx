@@ -20,7 +20,7 @@ export interface AuthContextDataProps {
   user: UserProps;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (userData: UserData) => Promise<void>;
-  signOut?: () => Promise<void>;
+  signOut: () => Promise<void>;
   isUserLoading: boolean;
   signed: boolean;
   loading: boolean;
@@ -106,6 +106,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       .finally(() => setIsUserLoading(false))
   }
 
+  async function signOut() {
+    await auth().signOut();
+    await AsyncStorage.removeItem('@DevPost_User')
+      .then(() => setUser(null))
+  }
+
   async function storageUser(data: UserProps) {
     await AsyncStorage.setItem('@DevPost_User', JSON.stringify(data));
   }
@@ -115,8 +121,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       signed: !!user,
       user,
       signUp,
-      isUserLoading,
       signIn,
+      signOut,
+      isUserLoading,
       loading
     }}>
       {children}
