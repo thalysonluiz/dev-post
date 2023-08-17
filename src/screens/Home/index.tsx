@@ -42,6 +42,7 @@ export function Home() {
       <Header />
       {loading ? <Loading /> :
         <ListPosts
+          showVerticalScrollIndicator={false}
           data={posts}
           renderItem={({ item }) => <Post data={item} />}
         />
