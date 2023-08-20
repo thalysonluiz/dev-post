@@ -1,7 +1,6 @@
-export interface GameParams {
-  id: string;
+export interface PostsUserParams {
   title: string;
-  bannerUrl: string;
+  userId: string;
 }
 
 export declare global {
@@ -11,7 +10,7 @@ export declare global {
       SignIn: undefined;
 
       NewPost: undefined;
-      PostsUser: undefined;
+      PostsUser: PostsUserParams;
 
       UpdateUser: undefined;
     }

@@ -1,24 +1,30 @@
-import { useState, useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
-
-import { Container, ButtonPost, ListPosts } from './styles';
-import { Feather } from '@expo/vector-icons';
-import { Header } from '@components/Header';
+import { Container, ListPosts } from './styles';
+import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { Post, PostData } from '@components/Post';
 import { Loading } from '@components/Loading';
-import { useAuth } from '@hooks/useAuth';
 
+interface PostsUserProps {
+  route: ParamListBase
+}
 
-export function Home() {
+export function PostsUser({ route }) {
+  const [title, setTitle] = useState(route.params.title);
   const [posts, setPosts] = useState<PostData[]>([]);
   const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
-  const { user } = useAuth();
+
+  useLayoutEffect(() => {
+    const options = navigation.setOptions({
+      title: title === '' ? '' : title
+    })
+  }, [navigation, title])
 
   useEffect(() => {
     const subscriber = firestore().collection('posts')
+      .where('userId', '==', route.params.userId)
       .orderBy('created', 'desc')
       .onSnapshot(snapshot => {
         const postList = [] as PostData[];
@@ -39,18 +45,14 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
       {loading ? <Loading /> :
         <ListPosts
           //keyExtractor={(item) => item.uid}
           showsVerticalScrollIndicator={false}
           data={posts}
-          renderItem={({ item }) => <Post data={item} userId={user.uid} />}
+          renderItem={({ item }) => <Post data={item} userId={route.params.userId} />}
         />
       }
-      <ButtonPost onPress={() => navigation.navigate('NewPost')}>
-        <Feather name="edit-2" size={24} color="#fff" />
-      </ButtonPost>
     </Container>
   );
 }

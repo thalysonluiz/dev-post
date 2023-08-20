@@ -1,4 +1,6 @@
+import { PostData } from "./../../components/Post/index";
 import styled from "styled-components/native";
+import { FlatList, FlatListProps } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
@@ -17,7 +19,9 @@ export const ButtonPost = styled.TouchableOpacity`
   right: 6%;
 `;
 
-export const ListPosts = styled.FlatList`
+export const ListPosts = styled(
+  FlatList as new (props: FlatListProps<PostData>) => FlatList<PostData>
+)`
   flex: 1;
   background-color: #f1f1f1;
 `;
