@@ -18,9 +18,11 @@ interface UserData {
 
 export interface AuthContextDataProps {
   user: UserProps;
+  setUser: (user: UserProps) => void;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (userData: UserData) => Promise<void>;
   signOut: () => Promise<void>;
+  storageUser: (data: UserProps) => Promise<void>;
   isUserLoading: boolean;
   signed: boolean;
   loading: boolean;
@@ -124,7 +126,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       signIn,
       signOut,
       isUserLoading,
-      loading
+      loading,
+      storageUser,
+      setUser
     }}>
       {children}
     </AuthContext.Provider>

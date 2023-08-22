@@ -63,3 +63,31 @@ export const ButtonText = styled.Text`
   font-size: 20px;
   font-style: italic;
 `;
+
+export const ButtonBack = styled.TouchableOpacity`
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top: 15px;
+  left: 25px;
+`;
+
+export const ModalContainer = styled.View`
+  width: 100%;
+  height: 50%;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+`;
+
+export const Input = styled.TextInput`
+  width: 80%;
+  height: 45px;
+  border-radius: 5px;
+  background-color: #ddd;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+`;
